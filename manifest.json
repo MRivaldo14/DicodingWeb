@@ -1,48 +1,51 @@
 {
   "name": "My Awesome PWA",
   "short_name": "AwesomePWA",
+  "lang": "id",
   "description": "Aplikasi web progresif yang dapat diinstall dan bekerja offline.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/DicodingWeb/",
+  "scope": "/DicodingWeb/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#4a90e2",
   "icons": [
     {
-      "src": "icons/icon-72x72.png",
+      "src": "/DicodingWeb/icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-96x96.png",
+      "src": "/DicodingWeb/icons/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-128x128.png",
+      "src": "/DicodingWeb/icons/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-152x152.png",
+      "src": "/DicodingWeb/icons/icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-192x192.png",
+      "src": "/DicodingWeb/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-384x384.png",
+      "src": "/DicodingWeb/icons/icon-384x384.png",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-512x512.png",
+      "src": "/DicodingWeb/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -50,25 +53,25 @@
       "name": "Tambah Story Baru",
       "short_name": "Tambah Story",
       "description": "Buat story baru dengan cepat",
-      "url": "/#/add-story",
+      "url": "/DicodingWeb/#/add-story",
       "icons": [
         {
-          "src": "icons/shortcut-icon.svg",
+          "src": "/DicodingWeb/icons/shortcut-icon.png",
           "sizes": "96x96",
-          "type": "image/svg+xml"
+          "type": "image/png"
         }
       ]
     }
   ],
   "screenshots": [
     {
-      "src": "screenshots/desktop-view.png",
+      "src": "/DicodingWeb/screenshots/desktop-view.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide"
     },
     {
-      "src": "screenshots/mobile-view.png",
+      "src": "/DicodingWeb/screenshots/mobile-view.png",
       "sizes": "360x640",
       "type": "image/png",
       "platform": "narrow"
