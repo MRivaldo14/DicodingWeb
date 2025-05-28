@@ -1,0 +1,309 @@
+<!doctype html><html lang="id"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>DicodingStoryMap</title><link rel="stylesheet" href="styles/style.css"/><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/><link rel="manifest" href="manifest.json"/><meta name="theme-color" content="#2196f3"/><meta name="mobile-web-app-capable" content="yes"/><link rel="icon" sizes="192x192" href="icons/icon-192x192.png"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><meta name="apple-mobile-web-app-title" content="Story App"/><link rel="apple-touch-icon" href="icons/icon-192x192.png"/><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><style>body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+      background: linear-gradient(to right, #f4f4f4, #e0e0e0);
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      color: #0f172a;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input,
+    textarea,
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #0f172a;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #0f172a;
+    }
+
+    #video,
+    #preview {
+      display: block;
+      margin: 1rem auto;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+    }
+
+    #map {
+      height: 300px;
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    a[href^="#/"] {
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        font-size: 0.9rem;
+      }
+
+      form {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+
+      #video,
+      #preview {
+        width: 90%;
+      }
+    }
+
+    #app {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    #app.fade-in {
+      opacity: 1;
+    }
+
+    .camera-wrapper video,
+    .camera-wrapper img.preview {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .story-card {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .story-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .story-content {
+      padding: 16px;
+    }
+
+    .story-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+
+    .story-description {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #374151;
+    }
+
+    .story-date {
+      font-size: 0.85rem;
+      color: #6b7280;
+      text-align: right;
+    }
+
+    header,
+    nav,
+    main,
+    footer {
+      padding: 1rem;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #0f172a;
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    header,
+    footer {
+      background-color: #0f172a;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+    }
+
+    nav li {
+      margin: 0 1rem;
+    }
+
+    nav a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #main-content {
+      padding: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav li {
+        margin: 0.5rem 0;
+      }
+    }
+
+    nav,
+    a,
+    .icon-button {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-banner {
+      background: #d4edda;
+      color: #155724;
+      padding: 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .error-banner {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      .add-story,
+      .story-list {
+        padding: 1rem;
+      }
+
+      .map-container {
+        height: 200px;
+      }
+
+      .preview {
+        width: 100%;
+        height: auto;
+      }
+
+      textarea,
+      input,
+      button {
+        width: 100%;
+        font-size: 1rem;
+      }
+    }
+
+    .not-found {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .not-found h2 {
+      font-size: 2em;
+      color: #e74c3c;
+    }
+
+    .not-found p {
+      margin: 20px 0;
+    }
+
+    .btn-home {
+      text-decoration: none;
+      background-color: #4a90e2;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }</style><script defer="defer" src="/DicodingWeb/bundle.js"></script></head><body><a href="#main-content" class="skip-link">Lewati ke konten utama</a><div id="auth-links" style="text-align: right; padding: 1rem;"></div><header><h1><i class="fas fa-map-marked-alt"></i> DicodingStoryMap</h1><nav><ul><li><a href="#/home"><i class="fas fa-home"></i> Beranda</a></li><li><a href="#/add"><i class="fas fa-plus"></i> Tambah Story</a></li><li><a href="#/login"><i class="fas fa-sign-in-alt"></i> Masuk</a></li><li><a href="#/register"><i class="fas fa-user-plus"></i> Daftar</a></li></ul></nav></header><main id="main-content" role="main"><div id="app" class="fade-in"></div></main><footer><p>DicodingStoryMap &copy; 2025. All rights reserved.</p></footer><form id="form-add-story" aria-label="Form Tambah Story"><label for="photo">Unggah Foto Cerita</label> <input type="file" id="photo" name="photo" accept="image/*" required class="input-field" title="Unggah foto cerita Anda" aria-describedby="photo-desc"/> <small id="photo-desc">Pilih file gambar untuk cerita Anda</small> <label for="story-title">Judul Cerita</label> <input id="story-title" name="title" required placeholder="Judul cerita"/> <label for="story-description">Deskripsi Cerita</label> <textarea id="story-description" name="description" required placeholder="Deskripsi cerita"></textarea> <button type="submit">Tambah Cerita</button></form><script src="bundle.js"></script></body></html>
